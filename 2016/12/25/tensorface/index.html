@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            tensorface | 
+        
+        Yangminz Blog
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="ZHAO YANG MIN">
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content="null,CNN,FaceRecognition">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Yangminz Blog">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="tensorface | Yangminz Blog">
+    <meta property="og:image" content="/img/favicon.png" />
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="CNN"> <meta property="og:article:tag" content="FaceRecognition"> 
+
+    
+        <meta property="article:published_time" content="12月 25, 2016" />
+        <meta property="article:modified_time" content="6月 11, 2017" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="tensorface | Yangminz Blog">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="http://yoursite.com" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2016/12/25/tensorface/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Yangminz Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ZHAO YANG MIN",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "tensorface",
+    "url": "http://yoursite.com/2016/12/25/tensorface/index.html",
+    "datePublished": "12月 25, 2016",
+    "dateModified": "6月 11, 2017",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?fJTiM/K1J3dWIruo3pxtAw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?oCSEO3ST+aEypEwttTDI9g==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    .footer-sns-facebook {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHptNjU3LjYgODcuOGw0LjggMy44djU1LjJjMCA1NC42IDAgNTUuMi00LjYgNTkuNi00LjQgNC40LTYgNC42LTUwLjIgNS42bC00NS42IDEtNy4yIDUuNmMtMTAuNCA4LTE2LjggMTcuMi0xOS4yIDI3LjQtMSA1LTEuOCAyNC44LTEuOCA0NCAuMiAzOCAxLjYgNDQuNiAxMC44IDQ4IDIuOCAxLjIgMjguNCAyIDU2LjggMiA0Ny44IDAgNTIgLjIgNTYuMiAzLjhsNC44IDMuOHY1NS4yYzAgNTQuNiAwIDU1LjItNC42IDU5LjYtNC40IDQuNi01LjQgNC42LTU3IDUuMi0yOC44LjItNTQuNC44LTU2LjggMS40LTIuNC42LTUuNiAzLTYuOCA1LjQtMS44IDMuMi0yLjQgNDEuNC0yLjYgMTQzLjJsLS4yIDEzOC44LTUuNiA0LjgtNS42IDQuOEg2MDljLTUyLjQgMC01Mi44IDAtNTguMi00LjZsLTUuNC00LjYtLjItMTQwLjYtLjItMTQwLjYtNC44LTMuOGMtNC4yLTMuNC04LTMuOC0zNS42LTMuOC0zMi44IDAtNDEtMS44LTQzLjYtMTAtLjYtMi4yLTEuMi0yNS40LTEuMi01MS40IDAtNjAuOC0uMi01NyAzLjQtNjEuNiAyLjgtMy42IDYtNCAzNy44LTUgMzMtMSAzNS4yLTEuMiAzOS40LTUuNiA0LjYtNC40IDQuNi01LjIgNS44LTcxIDEuMi03My40LjItNjcuMiAxNi42LTk5LjQgOC0xNS44IDEyLjgtMjIgMjgtMzcgMTUuMi0xNS4yIDIxLjQtMTkuNiAzOC4yLTI4IDExLTUuNCAyNC0xMSAyOS0xMi4yIDYuMi0xLjggMjguNi0yLjYgNzEuMi0yLjYgNTguNi0uMiA2Mi42IDAgNjcgMy42eiIvPjwvc3ZnPg==);
+    }
+    
+    
+    .footer-sns-twitter {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHptNTMyLjggMjA1YzEwIDQgMjMgMTAuOCAyOC44IDE1LjIgMTIuNiA5LjIgMTYuNiAxMC42IDI5LjQgOS40IDYuNi0uNiAxMy0zLjIgMjAuNC04LjIgMTEuMi03LjYgMTkuNC05LjIgMjMuNi01IDMuNiAzLjYgMi44IDktMi44IDE4LjYtNy4yIDEyLjQtNiAxOC44IDQuMiAyNC4yIDQuNCAyLjIgOC4yIDUuNiA4LjYgNy40IDEgNC44LTEyLjYgMjQuMi0yMiAzMS44LTExLjggOS4yLTE3LjIgMjIuNi0xOS42IDQ3LjgtNC44IDUwLjQtNy44IDY2LjYtMTYuNCA4NS40LTMgNy03IDE3LjgtOC44IDI0LTEuOCA2LjQtNSAxNC42LTcuNCAxOC40LTIuMiAzLjgtNy40IDEzLTExLjQgMjAuNC0xNy4yIDMwLjgtNDMuNCA2MS40LTcxLjQgODMuOC0yNS42IDIwLjQtNDYgMzMuMi02NC4yIDQwLjItOC40IDMuMi0xOCA3LjYtMjEuNCA5LjYtNy40IDQuNi0yMi40IDguNi01Ny4yIDE1LTYyLjIgMTEuNi03OS4yIDExLjQtMTM1LjYtMS0zMi40LTctMzguNi05LTUyLTE2LjgtMjEuNC0xMi42LTI0LjItMTQuOC0yNC4yLTE5LjQgMC02LjIgMTAuMi05LjIgMzUtMTAuNCAyMi40LTEgMjguNi0yLjYgNTctMTQuMiAyMy44LTkuOCAyOS40LTEyLjggMzAuNC0xNi44IDIuMi04LjItMy0xMy4yLTI2LjgtMjUuNC0yNS44LTEzLjItMzIuMi0xOC40LTQzLjgtMzUuOC05LTEzLjYtMTAtMjEuMi0zLjYtMzMuNiA1LjQtMTAuOCAzLjYtMTUtMTEuOC0yNS40LTktNi0xNC0xMS42LTIwLjgtMjIuNi0yMy40LTM3LjgtMjUtNTAuOC03LjItNTkuOCA0LjgtMi40IDkuNC01LjQgMTAuMi02LjYgMi44LTQuMi0uNC0xNS42LTguNC0yOS0xMS42LTE5LjYtMTMuMi0yNS44LTEzLjItNTUuMiAwLTI4LjggMi42LTM3LjggMTItNDAuMiA5LTIuMiAxNC44IDEgMzUuNiAyMC4yIDI0LjggMjIuOCA0My42IDM2LjYgNjIuOCA0NS44IDggMy44IDE3LjggOS4yIDIyIDEyIDQuMiAyLjggMTQuOCA3IDIzLjQgOS4yIDguNiAyLjIgMjQuMiA2LjggMzQuOCAxMC4yIDEzLjQgNC40IDIzLjYgNi40IDMzIDYuNiAxMi44LjIgMTQuMi0uMiAxOC42LTUuNCA0LTQuOCA0LjgtNy44IDQuOC0xOS4yIDAtMTQuNCA1LjYtMzkuNiAxMS4yLTUwLjYgNC4yLTguNCAyOS4yLTM0LjIgMzkuOC00MS40IDcuOC01LjQgMzUuNi0xNiA1Mi0yMCAxNC4yLTMuNiAzMi42LTEuMiA1Mi40IDYuOHoiLz48L3N2Zz4=);
+    }
+    
+    
+    .footer-sns-gplus {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHpNNDMwIDI5NS40YzQwLjYgMTUuNCA1Ni42IDIzLjggNzIuNiAzOC40IDYuOCA2LjIgNy4yIDE1LjIgMSAyMy40LTYuMiA4LTMzLjYgMzMuOC0zOSAzNi42LTUuNiAyLjgtMTcuNiAyLjgtMjMuMi0uMi0yLjQtMS4yLTguMi01LjItMTMtOC44LTExLjItOC42LTI0LjYtMTEuMi01NS4yLTExLjItMjcuNCAwLTQwLjYgMi42LTUyLjIgMTAuNC00LjQgMi44LTEyLjIgNy42LTE3LjIgMTAuNi0yMyAxMy4yLTUxLjQgNTUtNTUuOCA4Mi40LTIuNiAxNS42LTIuNCAzNC44LjIgNTEgMi44IDE3LjQgMTkuOCA0OC44IDM1LjIgNjUuMiAxNiAxNi42IDQ1IDMzLjYgNjIuOCAzNi42IDI2LjggNC40IDY1LjggMS42IDc5LjQtNS44IDIwLjYtMTEuNCAzMS0xOSA0MS0zMC40IDE4LjgtMjEuNiAyMy40LTM0LjIgMTUuNi00My44LTMuOC00LjgtNC40LTQuOC01MS01LjgtNjAuOC0xLjItNTYuMiAyLjItNTYuMi00My4yIDAtMzIuNC4yLTMzLjIgNC44LTM3IDQuNC0zLjYgOS0zLjggOTItMy44IDc5IDAgODcuOC40IDk0LjIgMy42IDExLjIgNS42IDEzIDExLjQgMTIuOCA0My40IDAgMjUuNC0uOCAzMC44LTcuNiA1OC00IDE2LjYtOS44IDM0LTEyLjYgMzktMi44IDUtOC4yIDE0LjItMTEuNiAyMC42LTguNCAxNS40LTI3LjIgMzYuOC00MC44IDQ2LjYtNS44IDQuNC0xMy44IDEwLjItMTcuNiAxMy4yLTMuOCAzLTExIDctMTYuMiA4LjgtNS4yIDEuOC0xNi4yIDYuNC0yNC40IDEwLTIyLjQgOS42LTM0LjggMTEuNi03MyAxMS42LTM3LjYuMi00Ny0xLjQtNzEtMTItOC4yLTMuNi0xNy42LTcuMi0yMC44LTgtMTUuOC0zLjgtNjctNDUuMi03Ny44LTYyLjgtMi4yLTMuOC03LjYtMTEuNi0xMS44LTE3LjItNC4yLTUuNC05LTE0LTEwLjYtMTktMS44LTQuOC02LjItMTYtMTAtMjQuOC0zLjYtOC44LTcuOC0yMi4yLTkuMi0yOS42LTMuMi0xOC44LTEuNC03OS40IDIuOC05MS40IDEzLjgtNDAuNiAzNS42LTc4IDU4LjgtMTAwLjIgMTQtMTMuNiA0Ny4yLTM2LjQgNTgtMzkuOCA0LjItMS40IDEzLjQtNS4yIDIwLjYtOC40IDIyLTEwIDMyLjgtMTEuNiA3Ni0xMSAzMy44LjYgNDAuNCAxLjIgNTAgNC44em0zNDAuOCA4MC44YzggMy42IDkuNiAxMS4yIDkuMiAzOS4yLS42IDM0LjQtLjYgMzQgNSAzOS42IDQuOCA1IDUuNCA1IDM3LjYgNSA0My40IDAgNDQuNC44IDQzLjIgMzYuMi0uOCAxNy0xLjIgMTguNC02LjQgMjMtNS40IDQuNi02LjYgNC44LTM3LjYgNC44LTMxLjIgMC0zMiAuMi0zNi44IDUtNS42IDUuNC01LjYgNC40LTUgNDEuMi40IDI2LjQuMiAyNy40LTQuNiAzMy00LjggNS42LTYgNS44LTI0LjQgNi40LTIwLjguOC0yOS42LTEuNC0zMy40LTguNC0xLjQtMi42LTItMTUuNi0xLjgtMzUuNi40LTMxLjIuNC0zMS42LTQuNi0zNi42cy01LjYtNS0zNi01Yy0xOC44IDAtMzMtLjgtMzYtMi4yLTcuNi0zLjYtOS42LTExLjItOC44LTMzLjguOC0yOC4yLjQtMjggNDEtMjggNDUuNCAwIDQ1LjQgMCA0NC42LTQyLjYtLjYtMzMtLjYtMzMgNS0zOC40IDQuNC00LjYgNi4yLTUgMjQuOC01IDExIDAgMjIuMiAxIDI1IDIuMnoiLz48L3N2Zz4=);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">历史的行程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">人工神经网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">历史与发展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">卷积神经网络的原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">卷积操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">卷积操作的实验</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">池化及实验</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">影响网络的超参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.</span> <span class="post-toc-text">主成分分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">主成分分析的历史</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">PCA的本质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">数学推导</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">降到$\mathbb{R}^0$的场合</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">$\mathbb{R}^1$的场合</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">高维场合</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">numpy实验</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">4.</span> <span class="post-toc-text">人脸识别：既成熟又不成熟的技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">更复杂的应用场景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">光照变化实验</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">人脸识别系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.</span> <span class="post-toc-text">实验代码tensorface简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">安装环境、数据集与运行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">module cs231n</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">module bytefish</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">module newton</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                tensorface
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>ZHAO YANG MIN</strong>
+        <span>12月 25, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CNN/">CNN</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/FaceRecognition/">FaceRecognition</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=tensorface&url=http://yoursite.com/2016/12/25/tensorface/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=tensorface&url=http://yoursite.com/2016/12/25/tensorface/index.html&via=ZHAO YANG MIN" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/12/25/tensorface/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2016/12/25/tensorface/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<h2>历史的行程</h2>
+
+<p>人脸识别对于人类而言并不困难。在我们的计算机视觉课上，陈老师曾经拿过几个名人的照片给我们识别，陈晓旭、布什……知道他们的人都可以认出照片对应的人，即使不认识照片对应的人，也能看出两张照片描述的是不是同一个人。科学研究发现，甚至只出生了一天到三天的婴儿，也能够识别不同的人脸，即便婴儿谁都不认识。人脸识别的机制与人类大脑的梭状回面孔区有密切关系，我们有时候会在电视节目的奇闻异事中看到患有“脸盲症”的人，他们大脑的相应区域都出现了一些障碍，所以人脸识别能力比较低。但是对于计算机而言，人脸识别并不是一件简单的事，尤其是在人脑的人脸识别机制尚未探清的情况下，我们主要依赖统计方法来帮助计算机进行人脸识别。</p>
+
+
+<p>在历史上，第一个真正意义上的人脸识别是在1965年完成的，Woody Bledsoe, Helen Chan Wolf, Charles Bisson都成为了人脸识别的先驱。他们运用几何方法，人工标注面部特征，计算出两眼之间的距离比例、眼与鼻的角度等几何特征，在他们的数据集上获得了不错的效果。但是几何方法由于其局限性太大，并没有走到21世纪。</p>
+
+
+<p>到了1991年，基于主成分分析的特征脸方法被MIT的Matthew A. Turk和 Alex P. Pentland提出了。这对于人脸识别而言是一个里程碑式的进步，这样基于统计的方法要优于基于几何结构的方法，一时间成为了人脸识别算法的主流，一直持续到现在，依然作为人脸识别中非常重要的方法。<br></p>
+
+
+<p>在21世纪，随着人工神经网络摆脱过去的阴霾，开始走向深度学习，基于卷积神经网络的一系列计算机视觉领域的突破给人脸识别带来了新的方法。Krizhevsky在ImageNet上用卷积网络大杀四方，前后时间内人脸识别也运用了卷积网络的技术。到现在，深度学习已经成为计算机视觉领域内的一股有力的支流，像Face++这样的公司展露头角。</p>
+
+
+
+<h2>卷积神经网络</h2>
+
+<h3>人工神经网络</h3>
+
+
+<p>人工神经网络的数学基础是Kolmogorov和Arnold在50年代发展起来的函数逼近定理：</p>
+
+<p><hr></p>
+<p>$\Phi (y)$是单调有界连续增函数，其中$y = f(x_1, x_2, \ldots, x_n)$只是一个有界闭子集上的连续函数，则：</p>
+
+<p>$\forall \epsilon &gt; 0$，存在正整数$H$和$c_j, \theta<em>j$，有$w</em>{ij},i,j \in { 1,2,\ldots,n}$，</p>
+
+<p>[ g(x_1,x_2,\ldots,x<em>n) = \sum</em>{j=1}^H c<em>j \Phi \left( \sum</em>{i=1}^n w_{ij} \cdot x_i - \theta_j \right) ]<br>[ s.t. \max |f(x_1,x_2,\ldots,x_n) - g(x_1,x_2,\ldots,x_n)| &lt; \epsilon]</p>
+<p>其中$\Phi(\cdot)$在实际运用中一般为$\tanh, sigmoid$这些常见的非线性函数。</p><br><hr><br><p>在Kolmogorov定理的基础上，复杂函数逼近的方法得以建立。到60年代时，在梯度下降算法的帮助下，感知机模型被提出。到了80年代，人工神经网络被建立起来，而1986年Hinton提出的Back Propagation算法更是通过求导的链式法则解决了高层网络难以反馈求导的问题。到了21世纪，硬件的发展使得人工神经网络的运算速度大为提升,逐渐走向深度学习。</p>
+
+
+<h3>历史与发展</h3>
+
+<p>在21世纪，20世纪末发展的神经网络模型的变种——卷积神经网络开始随着机器性能的提升而展现威力。1998年，Yann LeCun在他的惊世传奇<em>Gradient-based learning applied to document recognition</em>中提出了第一个真正意义上的卷积神经网络模型——LeNet-5，Yann LeCun利用这个模型在Mnist手写数据集识别上取得了突破性的进展，而这个数据集至今仍作为机器学习入门的数据集在使用。</p>
+
+
+<p>在2006年，Hinton则提出了他的惊世骇俗之神作<em>Reducing the dimensionality of data with neural networks</em>，点明了深层网络对于特征学习能力的优越性，这为后来如火如荼的深度学习奠定了基础。</p>
+
+
+
+<p>到了2012年，Hinton的亲传弟子Krizhevsky提出了他的CNN模型AlexNet，在ImageNet上一鸣惊人，以极大的差距击败第二名摘得桂冠。同时，他的论文<em>Imagenet classification with deep convolutional neural networks</em>也将永远被人们铭记，因为这标志着人工智能的研究真正开始进入深度学习阶段。</p>
+
+
+
+<p>但是，我们也可以看到，实际上真正的理论创新在20世纪就已经止步不前了，如今深度学习能够如此繁花似锦、烈火烹油，完全得益于硬件的加速。回顾历史，我们可以发现，人工智能这一领域，基本上始终是围绕着神经网络为中心展开的，虽然其中有SVM异军突起，但终究扭转不了历史的行程。</p>
+
+
+
+<h3>卷积神经网络的原理</h3>
+
+<p>数学上的离散卷积公式是这样的：</p>
+
+<hr>
+
+<p>若$\xi$与$\eta$是独立的随机变量，且都取非负整数值，概率分布分别是${a_k}$和$b_k$，则随机变量$\zeta = \xi + \eta$的概率分布为：<br></p>
+
+
+<p>[ P{\zeta = r} = \sum<em>{k = 0}^r P{ \xi=k, \eta=r-k } = \sum</em>{k = 0}^r a<em>k b</em>{r - k} ]</p>
+<hr>
+
+<p>而实际上神经网络的原理和卷积公式的关联并不密切。以1维的卷积网络为例：</p>
+
+<p><img src="/images/tensorface/fig09.jpg" alt=""></p>
+<p>可以看到它实际上只是一个窗口上的加权平均。但是这样的网络，却在图像处理方面有着巨大的优势。</p>
+
+
+<p>众所周知，传统网络对于复杂特征的学习非常具有优势，但是在人脸识别这样复杂的工程中，如果使用传统的神经网络会带来一个非常严重的后果——模型参数过多。由于灰度图片作为输入时，每个像素上的值都是一个输入，而图片上的像素点又是何其多，给每个输入分配一个权重，这样的训练未免太强机器所难。因此，解决这个问题的方法是减小网络参数，在每层网络上使用全局参数，这就是LeCunn的论文的想法。</p>
+
+<p><img src="/images/tensorface/fig10.jpg" alt=""></p>
+<p>上面这张图出自Stanford University的课程cs231n。这张图描述了传统的神经网络与卷积网络的差异。左图是一张3层的全连接网络，可以看到即便输入只在$\mathbb{R}^3$，但到输出层的时候保存的参数已经不少了，如果输入达到$3 \times 1920 \times 1080$这样的级别，那么参数更是爆炸性的多，训练根本无从下手。</p>
+
+<p>但是卷积网络则可以避免这个弊端。可以看到左图的这个网络，对于一个RGB三色通道的$\mathbb{R}^{3 \times H \times W}$的图像输入，卷积网络通过卷积滤波器（卷积核）提取同一张图像的不同变换下的特征，需要保存的权重矩阵的数量只有滤波器深度那么多，这样大大减小了模型的参数量。</p>
+
+
+<h3>卷积操作</h3>
+
+<p>卷积网络的关键之一自然是<strong>卷积操作</strong>。我们依然借用cs231n的图来做如下说明：</p>
+
+
+<p><img src="/images/tensorface/fig11.jpg" alt=""></p>
+<p>上图是一个RGB三色通道$\mathbb{R}^{3 \times H \times W}$的图像输入。左边三张蓝色矩阵是图像的三色通道，中间有两列粉红色的$\mathbb{R}^{3 \times 3 \times 3}$的卷积滤波器矩阵$\mathbf{W_0}, \mathbf{W_1}$，分别对应着右边两张绿色的输出矩阵。在这里要注意，卷积滤波器的深度必须要和图像输入的深度一致，这是显而易见的，在上图中为3。卷积滤波器的个数可以任意设定，这里是2。</p>
+
+<p>进行卷积操作时，$\mathbf{W_0}$的3个深度的矩阵分别遍历3个深度上的图像输入，并且做向量数量积形式的加权平均，然后将三个数值加到一起，作为卷积层的一个数值。在上图中，对应关系已经标注得很清晰了。</p>
+
+<h3>卷积操作的实验</h3>
+
+
+<p>可见通过这样的模型，确实能够有效地减少模型的参数。我们可以通过传统网络背后的Kolmogorov定理来理解卷积网络，认为这是一种特殊的参数设定。但是问题来了，虽然我们知道卷积网络能够减少网络参数，而且也是Kolmogorov定理的一种变形，但是它为什么能够工作，这一问题回答得还不足够清楚。</p>
+
+<p>一种通俗而且形象的解释是类比于人脑中的神经元。人脑中的神经元的结构实际上更类似于卷积网络而非传统的全连接网络：</p>
+
+
+<p><img src="/images/tensorface/fig12.jpg" alt=""></p>
+<p>人脑的神经元也是局部连接的，并不是一个神经元与所有其他神经元相连，因此卷积网络和人脑更相似，所以特征学习能力更强。实际上这也是可以理解的，表现在图像上就是卷积网络更能抓住局部特征，无视图像远方的干扰信息。也就是说，当一个卷积操作在眼睛的局部提取眼睛的局部信息时，并不会受到远方鼻子、嘴巴信息的干扰，因此卷积网络具有更强的局部特征学习能力。</p>
+
+
+
+<p>我在实验中利用Keras写了这样一个简单的卷积网络</p>
+
+<pre>
+model = Sequential()
+
+# Building: conv1 - tanh - maxpooling
+model.add(Convolution2D(filter1, conv_side, conv_side,
+    border_mode='same', 
+    subsample = (2, 2), dim_ordering='tf', 
+    input_shape=(h, w, 1)))
+# print model.output_shape
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(pool_side, pool_side)))
+
+# Building: conv2 - tanh - maxpooling
+model.add(Convolution2D(filter2, conv_side, conv_side))  
+model.add(Activation('tanh'))  
+model.add(MaxPooling2D(pool_size=(pool_side, pool_side)))  
+# model.add(Dropout(0.25))  
+
+# Building: flat - dense - tanh - dense - softmax
+model.add(Flatten())  
+model.add(Dense(1000)) #Full connection  
+model.add(Activation('tanh'))  
+# model.add(Dropout(0.5))  
+model.add(Dense(SUBJECT_NUM))  
+model.add(Activation('softmax')) 
+
+sgd = SGD(lr=sgd_lr,decay=sgd_decay,momentum=sgd_momentum,nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+return model
+</pre>
+
+
+<p>训练好以后保存了模型以及参数。然后将图像输入这个训练好的模型中，将第一次卷积的中间结果取出，经过归一化到$[0, 255]$等处理，还原出图像：<br></p>
+
+
+<p><img src="/images/tensorface/conv1.png" alt=""></p>
+<p>上下两行4张图分别是某个人的脸经过卷积滤波器，在卷积层的前4深度上的图像。可以看到，不同深度的滤波器实际上在抓取不同的特征，比如卷积滤波器$\mathbf{W_0}$抓到的特征$(0, 0)$这张脸在图像上表现为蓝色，而$\mathbf{W_2}$抓到的特征$(0, 2)$则表现为红色。</p>
+
+
+
+<h3>池化及实验</h3>
+
+<p>除了卷积操作以外，总是成对出现的操作有池化(pooling):</p>
+
+
+<p><img src="/images/tensorface/./fig14.jpg" alt=""></p>
+<p>我理解池化是进一步丢弃数据的过程。上图是一个最大池化的例子，在每个池化窗口中，选出最大值作为池化层的数据。这样的丢弃数据实际上是具有某种“随意性”的，这给反向求导带来了不可捉摸的困难，但是现在大家写卷积网络基本都用机器学习的框架，所以也就可以不考虑这个问题了，把精力集中在前向传播上。总之，这种“随意性”以及无法精确的反向求导，能够比较好地对抗过拟合问题。</p>
+
+
+<p><img src="/images/tensorface/pool1.png" alt=""></p>
+<p>可以看到第一层池化层的结果如上图所示，这个结果其实我自己也没怎么搞明白为什么会丢掉这么多的数据，但是到第二层卷积与池化之后就变得正常了。</p>
+
+<p><img src="/images/tensorface/conv2.png" alt=""></p>
+<p>这是第二层卷积。可以看到，经过一次卷积与池化以后，到第二层卷积层时，卷积层输入已经被大大削减，而且基本保留了原图像的重要特征：眼睛、鼻子、嘴巴。可见，卷积网络的学习能力是很强的。</p>
+
+
+<p><img src="/images/tensorface/pool2.png" alt=""></p>
+<p>可以看到，到第二层池化以后，特征更加明显，并且输入更小。也就是说，采用卷积与池化，实际上是一个在尽可能保留特征的前提下，不断减小图像规模的过程。从结果来看，训练好的卷积网络将这两点结合得很好，到第二次池化时，也就是上面这张图，图像的抽象层次基本上只保留了眼睛、鼻子、嘴巴这样的特征了。到这一步，接下来再用一个传统网络作为分类器，代价就并不高了。所以我在模型中经过两层卷积以后就进行了全连接分类。</p>
+
+
+
+
+<p>其实我觉得可以从类比<strong>积分中值定理</strong>的角度来理解卷积和池化。</p>
+
+<hr>
+
+<p>设$f$和$g$都在区域$\Omega$上可积，且$f$在$\Omega$上连续，$g$在$\Omega$上不变号，则：</p>
+
+
+<p>[ \exists \xi \in \Omega, s.t. ]<br>[ \int<em>{\Omega} f \cdot g dV = f(\xi) \int</em>{\Omega} g dV]</p>
+<hr>
+
+
+<p>可以看到，积分中值定理实际上是在函数连续的条件下选取了一个代表$f(\xi)$来代表整个区域$\Omega$。而对于一张合理的图像而言，也应该具有某种\<strong>连续性与局部性</strong>。所以，对于每一个局部区域，卷积实际上是找了一个代表来进行降维。卷积操作也可以这样粗糙地理解，它是用不同的代表（特征）来表征一个局部区域。由于图像语义的局部性，所以局部卷积和池化能够排除其他局部的、全局的干扰；由于连续性，所以能够在保持局部特征的前提下不断压缩图像规模。</p>
+
+<p>需要注意的是，到这里我们可以看到，不论是卷积操作亦或是池化操作，都基于输入在局部区域上保持着“连续性”与“局部性”。这个特点应该是一张合乎情理的图像所与生俱来的，也是卷积网络之所以能在计算机视觉领域大展神威的原因之一。但是，如果我们做一个简单的思想实验，对于图像进行外延：如果我们的技术能够超越离散进化到连续的程度，那么就能找到这样一种图像，它“处处不连续、处处不可微”，也就是类似于<em>Dirichlet</em>函数，并且在取值上更加混沌的图像，那么卷积网络应该是无能为力的。</p>
+
+
+
+<h3>影响网络的超参数</h3>
+
+
+
+<p>影响卷积网络的超参数有很多，隐藏层的大小、卷积层的个数、卷积窗口的大小、步长、是否做padding(0或1)……在一篇合格的文献中基本上都能够找到相关超参数的性质分析，而且我也没做改变超参数的实验，所以就没必要一一说明了。</p>
+
+<p>在这里我只想简单说一下网络层数的影响。因为卷积与池化都是局部操作，所以每一层只获得了前一层的局部信息，但是显然层数累加的时候这样的局部信息也在累加。也就是说，层数越高，每一层获取的图片信息“密度”就越高，它越能从“局部感知”走向“全局感知”。</p>
+
+
+
+<h2>主成分分析</h2>
+
+<p>相比于与人工智能始终紧密联系的神经网络，主成分更像是传统的数理统计方法。因此它并不像神经网络那样充满了不可知的“玄学”（甚至于有人将其比喻为“黑箱”），主成分分析从构想，到数学推导，再到结果，都一气呵成，一俟现世就已经成熟，充满了优雅。如果打一个不恰当的比喻，主成分像是Alexis de Tocqueville笔下的旧贵族，浴沂风雩咏而归，而神经网络则像是他笔下的民主人，终日乾乾，夕惕若厉。</p>
+
+
+<h3>主成分分析的历史</h3>
+
+<p>主成分分析(PCA)由Karl Pearson在1901年首创，距今已经有超过100年的历史了，当时大清还没亡。它是为了解决统计力学问题应运而生的，后来被广泛地运用在信号处理等领域。到现在，PCA在复杂统计数据的处理上享有赫赫威名，人脸识别就是其应用之一，这部分的历史在第一节就已经讲过了。</p>
+
+
+<h3>PCA的本质</h3>
+
+<p>PCA在本质上是一个特征分析多元统计分布的方法，它要寻找高维的数据空间上对方差影响最大的方向。从几何上讲，样本点$\mathbf{x_1}, \ldots, \mathbf{x_n}$在$\mathbb{R}^d$上形成了椭圆状的云团，PCA要找到就是这个云团的主轴，也就是散布最大的方向，从而实现对空间的降维。</p>
+
+<p>在前一节卷积网络中，我们有提到过，实际上CNN也实现了降维，不过它并不直白，而且保留了图像的特征。在PCA中，降维是直观的，目的是找到正确的方向，投影样本数据以后依然能够有效地分类。</p>
+
+
+<h3>数学推导</h3>
+
+<p>假定我们有人脸数据集$\mathbf{X} = {\mathbf{x_1}, \mathbf{x_2}, \cdots, \mathbf{x_n} } \in \mathbb{R}^{n \times d}$</p>
+
+
+<h4>降到$\mathbb{R}^0$的场合</h4>
+
+<p>$\mathbb{R}^0$场合是指，我们希望找到一个$\mathbf{x_0} \in \mathbb{R}^{d}$点就能代表所有的人脸样本点。理论上讲是所有的人脸样本点都投影到这个点，但从实际效果上讲就是找到$\mathbf{x_0}$能最好地代表人脸样本就行。或者说：与所有样本之间的距离的平方和越小越好：</p>
+
+<p>[ J_0(\mathbf{x<em>0}) = \sum</em>{k = 0}^n || \mathbf{x_0} - \mathbf{x_k} ||^2 ]</p>
+<p>拆开目标函数：</p>
+
+<p>[ J_0(\mathbf{x<em>0}) = \sum</em>{k = 1}^n || (\mathbf{x_0} - \mu ) - ( \mathbf{x_k} - \mu ) ||^2 ]</p>
+<p>[  = n\cdot || \mathbf{x<em>0} - \mathbf{\mu} ||^2 + \sum</em>{k = 1}^n || \mathbf{x_k} - \mathbf{\mu} ||^2  - 2 \cdot ||\mathbf{x<em>0} - \mathbf{\mu} || \cdot  \sum</em>{k = 1}^n ( \mathbf{x_k} - \mathbf{\mu} ) ]<br>[  = n \cdot || \mathbf{x<em>0} - \mathbf{\mu} ||^2 + \sum</em>{k =1}^n || \mathbf{x_k} - \mathbf{\mu} ||^2  ]</p>
+<p>右边一项并不依赖于$\mathbf{x_0}$是常量，所以左边一项取均值$\mu$时目标函数取极小值。</p>
+
+
+<p>由此可以知道，在$\mathbb{R}^0$场合下，最能代表所有人脸样本的就是均值点。但是$\mathbb{R}^0$显然是降维过头了，到这个程度已经没有方向可言了，分开数据更无从谈起，所以下面要考虑到投影到$\mathbb{R}^1$的场合。</p>
+
+
+
+<h4>$\mathbb{R}^1$的场合</h4>
+
+<p>现在考虑降到一维的情况，也就是将样本点投影到一条经过均值点的直线上，让这根直线上的投影点来代表全体数据点：</p>
+
+<p>[ \mathbf{x} = \mathbf{\mu} + a \cdot \mathbf{e} ]</p>
+<p>在这里，标量$a$反应了投影点对均值的偏离程度，$\mathbf{e}$是单位方向向量。</p>
+
+
+<p>现在，我们希望最小化投影点和实际点之间的差异：</p>
+
+
+<p>[ ||(\mathbf{\mu} + a_k \cdot \mathbf{e}) - \mathbf{x_k}|| ]</p>
+<p>所以构造平方误差函数：</p><br>[ J_1(a_1, \cdots, a<em>n, \mathbf{e}) = \sum</em>{k=1}^n ||(\mathbf{\mu} + a_k \cdot \mathbf{e}) - \mathbf{x_k}||^2  ]<br><br><br><br><p>展开处理：</p><br>[ J<em>1 = \sum</em>{k=1}^n a<em>k^2 - 2\sum</em>{k=1}^n a_k \mathbf{e^T}(\mathbf{x<em>k - \mu}) + \sum</em>{k=1}^n ||\mathbf{x_k - \mu}||^2 ]<br><br><br><br><p>这样就可以对$a_k$求偏导：</p><br>[ \frac{\partial J_1}{\partial a_k} = 2a_k - 2\mathbf{e^T}(\mathbf{x_k - \mu}) = 0 \Rightarrow a_k = \mathbf{e^T}(\mathbf{x_k - \mu}) ]<br><br><br><br><p>从几何上讲，这告诉我们向量$\mathbf{x<em>k}$只要向直线$\mathbf{e}$做垂直投影，就能得到最小方差。接下来的问题是：如何找到直线$\mathbf{e}$的最优方向？这就需要引入散布矩阵的概念：</em></p><br>[ \mathbf{S} = \sum{k=1}^n (\mathbf{x_k - \mu})(\mathbf{x_k - \mu})^T ]<br><br><br><br><p>散布矩阵实际上是协方差矩阵的$n-1$倍。用散布矩阵来描述目标函数：</p><br>[ J<em>1(\mathbf{e}) = -\mathbf{e^TSe} + \sum</em>{k=1}^n ||\mathbf{x_k - \mu}||^2 ]<br><br><br><br><p>用Lagrange乘子法求$||\mathbf{e}||=1$的条件极值：</p><br>[ u = -\mathbf{e^TSe} + \lambda \left( \mathbf{e^Te} - 1 \right) ]<br><br><br><br><p>对$\mathbf{e}$求偏导：</p><br>[ \frac{\partial u}{\partial \mathbf{e}} = 2\mathbf{Se} - 2\lambda\mathbf{e} = 0 ]<br>[ \Rightarrow  \mathbf{Se} = \lambda\mathbf{e} ]<br><br><p>所以，<strong>单位方向向量一定和特征向量平行</strong>！要让$\mathbf{e^TSe} = \lambda\mathbf{e^Te} = \lambda$最大，就要选取散布矩阵最大的特征值所对应的特征向量作为方向向量。</p>
+
+
+<p></p><h4>高维场合</h4><p></p>
+<p>如果要提取到高维空间$d’$（更多）的特征向量呢？</p>
+
+<p>[ \mathbf{x = \mu} + \sum_{i=1}^{d’} a_i \mathbf{e_i} ]</p>
+<p>取散布矩阵前$d’$个最大的特征值所对应的特征向量就行了。</p>
+
+<p>此外，由于散布矩阵实对称，所以这些特征向量相互正交，相互独立。</p>
+
+
+<h3>numpy实验</h3>
+
+<p>为了更直观地展现PCA的效果，我用numpy写PCA时，也像CNN一样提取了两个中间结果：</p>
+
+
+<p><img src="/images/tensorface/eigenfaces.png" alt=""></p>
+<p>这张图是将选出来的特征向量都还原为图片所得的结果，可以看到每一个特征向量都抓取到了不同的人脸样本的面部特征，这些特征和CNN一样主要集中在眼睛、鼻子、嘴巴等五官上。</p>
+
+<p><img src="/images/tensorface/eigenvectors.png" alt=""></p>
+<p>这张图则对比不同特征向量的数量的影响。在实验中选择了不同数量的特征向量，也就是投影的正交坐标的个数，然后将它们还原成人脸。可以看到，特征向量越多，人脸就越清晰。这是当然的，投影越多越接近原图，当取全部特征向量做投影时，实际上也就恢复成原来的人脸了。实际上这方面和矩阵的秩有关，因为特征值的个数与矩阵的秩相同，深究下去的话，可能会发现灰度图像与它的矩阵的秩之间有深刻的联系。</p>
+
+
+
+<h2>人脸识别：既成熟又不成熟的技术</h2>
+
+<p>上面两个模型，在AT\&amp;T与Cambridge大学联合做出来的AT\&amp;T数据集<sup><a href="http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html" target="_blank" rel="external">http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html</a></sup>上都有近乎$100\%$的识别率，难道我们就可以说人脸识别到现在是一项成熟的技术了吗？非也，实际上在更复杂的课题中，模型的表现并不总是令人满意。</p>
+
+
+<h3>更复杂的应用场景</h3>
+
+
+
+<p>就单拿静态照片的识别而言，主要有两个重大的问题：光照变化和姿态变化。</p>
+
+
+
+<p>不同光照条件下的照片会给图像带来巨大的灰度相对分布，这样引起的光照变化带来的同一张人脸之间的差异甚至可能超过其他的人脸之间的差异，也就是类内差异大于类间差异。下图是经过剪裁的Yale的人脸数据集<sup><a href="http://vision.ucsd.edu/~iskwak/ExtYaleDatabase/ExtYaleB.html" target="_blank" rel="external">http://vision.ucsd.edu/~iskwak/ExtYaleDatabase/ExtYaleB.html</a></sup>，可以看到光照变化的影响：</p><br><img src="/images/tensorface/./fig25.png" alt=""><br><br><p>对比上面三张图，我们甚至难以认出第一张和第二张是同一个人！对于这样的光照变化，计算机科学家们寻求的解决方法有改进现有算法、合成全面的人脸模型。</p><br><p>另一个问题是姿态变化，当一个样本在数据集中有时戴眼镜，有时戴口罩，有时候把头转过去，这样的姿态变化也会使识别变得非常困难。解决这个问题的构想是使用微分流形的思想用2维投影线性组合重构3维对象。<br></p>
+
+
+
+
+<p>这两个问题都是走出实验室，在人脸识别的实际应用中非常关键的问题，虽然都有进展，但是距离完全解决都有一段距离。因此，在复杂应用场景下的人脸识别，还是一个不够成熟的技术。</p>
+
+
+
+<h3>光照变化实验</h3>
+
+
+<p>针对上面的光照变化问题，我又补充了一个光照变化的实验。这次用的数据集是Yale的扩展数据集，就如上图所示，它具有充分的光照变化。我依然使用之前写好的CNN和PCA，重新训练以后进行预测，发现：卷积网络的识别率依然维持在近乎$100\%$的水平，而PCA降到了$66\%$左右。<br></p>
+
+
+<p><img src="/images/tensorface/eigenfacesYale.png" alt=""></p>
+<p>上面这张图抽取了PCA中的前16个特征向量并且还原成人脸，可以看到很多特征向量收到光照的污染非常严重。因此，在PCA中，将受污染的特征向量丢弃，会有助于提高识别率。如何找到这些受污染的特征向量就是另一个话题了。</p>
+
+
+
+<p>而对于卷积网络，由于它对于人脸特征的抽象层次较高，能够过滤掉一些光照干扰，所以识别率依然接近$100\%$。但是，需要说明的是，也存在着CNN过拟合的风险。<br></p>
+
+
+<h3>人脸识别系统</h3>
+
+<p>人脸识别系统是一个非常复杂的工程。如果能在实际中应用，需要结合摄像技术、计算机视觉、机器学习等诸多领域的内容。就以公安系统的人脸识别为例，需要通过摄像头抓取图像，然后能够对图像剪裁，将不同的人脸分辨出来。然后通过与数据库中的储存的犯罪嫌疑人的照片进行学习、识别。每一个过程，考虑到数据量和实际应用场景，都是很复杂的，不同于上面两个模型试验，需要计算机科学家与工程师们的不懈努力。</p>
+
+
+<h2>实验代码tensorface简介</h2>
+
+<h3>安装环境、数据集与运行</h3>
+
+
+<p>这个课程的实验代码tensorface有两个托管地址：</p>
+
+<ul><br><li><a href="https://github.com/yangminz/tensorface.git" target="_blank" rel="external">https://github.com/yangminz/tensorface.git</a></li><br><li><a href="https://git.coding.net/yangminz/tensorface.git" target="_blank" rel="external">https://git.coding.net/yangminz/tensorface.git</a></li><br></ul>
+
+
+
+
+<p>如果在中国大陆使用github速度慢的话可以考虑使用备份托管。</p>
+
+
+<p>如果想要运行tensorface（只能在linux机器上运行），可以git clone任一托管地址，通过批量命令：</p>
+
+
+<pre>
+sudo bash tensorfaceEnv.txt
+</pre>
+
+<p>来实现运行环境的安装。</p>
+
+<p>接着需要安装数据集，在数据集模块attfaces, yalefaces各自有一份数据集来源文件source.txt，里面有数据集的网址，可以下载到各自模块中。然后需要运行数据整理脚本：</p>
+
+
+<pre>
+tensorface/attfaces: python save_data.py
+tensorface/yalefaces: python save_data.py
+</pre>
+
+
+
+<p>获得.npy格式的数据集，这是为了在此后的运行中能够加快数据I/O速度。</p>
+
+<p>接着可以运行tensorface的三个主要的脚本：</p>
+
+
+
+<pre>
+tensorface: python stanford.py
+tensorface: python eigenface.py
+tensorface: python kerasCNN.py
+</pre>
+
+<p>就能复现我的实验。更多的操作，比如选择怎样的数据集、是否进行画图等等，都在脚本的UI中。</p>
+
+
+<h3>module cs231n</h3>
+
+<p>脚本stanford.py与相应的python模块cs231n由于训练速度太慢，所以实验报告里没有用到任何这部分的结果，也就不在报告里说明了。这个模块是以Stanford大学的计算机视觉课程cs231n的课程作业为摹本写的，主要是使用python-numpy搭建一个卷积网络。</p>
+
+
+<h3>module bytefish</h3><br><p>这一模块对应的脚本是eigenface.py，主要参考了github上一份关于特征连识别的教程github.com/bytefish/facerecognition，特别是它的可视化的代码。实验中所画出来的所有人脸，基本上都基于bytefish的可视化部分的代码。</p><br><br><br><p>运行脚本eigenface.py时，会根据UI得到的目标选择相应的函数执行。UI的信息在help.txt中，主循环中会不断打印：</p><br><br><br><br><pre><br>Usage:<br>eigenface &gt; 0    - choose one picture from each subject as test<br>eigenface &gt; 1    - choose one picture from one subject as test<br>eigenface &gt; 2    - draw eigenfaces into ./image<br>eigenface &gt; exit - exit python<br></pre><br><br><p>对于训练而言，从数据集的每个人的照片中取一张组成测试集，剩下的照片作为训练集：</p><br><br><br><pre><br>train, test = bytefish.variable.initialize_variables_entire(X, y)<br>model = bytefish.model.EigenFace(train[‘faces’], train[‘label’])<br>for i in xrange(len(test[‘faces’])):<br>    print”expected =”, test[‘label’][i], “/“, “predicted =”, model.predict(test[‘faces’][i])<br></pre><br><p>bytefish/variable.py中不同的函数对从数据集读入的数据与标签做不同的分割得到训练集与数据集。model.py通过训练集构建一个EigenFace类：</p><br><br><br><pre><br>class EigenFace(object):<br>    def <strong>init</strong>(self, arg_X, arg_y):<br>    def compute(self, arg_X, arg_y):<br>    def predict(self, arg_X):<br></pre><br><br><br><p>在初始化的时候会通过成员函数self.compute()调用相应函数计算出特征向量矩阵，然后在外部调用成员函数self.predict()进行预测。特征向量矩阵的计算通过调用下面的函数实现，这也是算法的核心所在：</p><br><br><br><br><pre><br>def pca(arg_X):<br>    n,d = arg_X.shape<br><br>    # math expectation<br>    mu = arg_X.mean(axis=0)<br>    arg_X = arg_X - mu<br>    if n &gt; d:<br>        C = np.dot(arg_X.T, arg_X)<br>        val_eigen, vec_eigen = LA.eigh(C)<br>    else:<br>        C = np.dot(arg_X, arg_X.T)<br>        val_eigen, vec_eigen = LA.eigh(C)<br>        vec_eigen = np.dot(arg_X.T, vec_eigen)<br>        for i in xrange(n):<br>            vec_eigen[:,i] = vec_eigen[:,i] / LA.norm(vec_eigen[:,i])<br>    # or simply perform an economy size decomposition<br>    # vec_eigen, val_eigen, variance = LA.svd(arg_X.T, full_matrices=False)<br>    # sort vec_eigen descending by their eigenvalue<br>    idx = np.argsort(-val_eigen)<br>    val_eigen = val_eigen[idx]<br>    vec_eigen = vec_eigen[:,idx]<br><br>    # vec_eigen.shape = (d, n)<br>    # val_eigen.shape = (n, )<br><br>    # evaluate the number of principal components<br>    # needed to represent 95% Total variance<br>    eigen_sum = np.sum(val_eigen)<br>    csum, k95 = 0, 0<br>    for i in xrange(len(val_eigen)):<br>        csum += val_eigen[i]<br>        tv = csum / eigen_sum<br>        if tv &gt; 0.95:<br>            k95 = i<br>            break<br>    if (k95 &lt;= 0) or (k95 &gt; n):<br>        k95 = n<br><br>    # select only k95<br>    val_eigen = val_eigen[0:k95].copy()<br>    W = vec_eigen[:,0:k95].copy()<br><br>    cache = [val_eigen, k95]<br>    return W, mu, cache<br></pre><br><br><p>其中特征向量数量的选择被选定为训练集上有$95\%$的正确率所对应的数量，在没有光照的测试集上识别率能达到几乎$100\%$，但在具有光照变化的数据集上只有$66\%$。</p><br><br><br><h3>module newton</h3>
+
+
+<p>这一模块就是通过Keras这一机器学习框架实现的卷积网络。Keras以tensorflow为后台运行，语法上比tensorflow简单许多。先构建一个CNN网络计算图，然后通上数据进行自动求导训练。这部分主要的代码在之前已经展现过了。<br></p>
+
+<p>在实验中，需要先保存一下模型和训练的模型参数：</p>
+
+
+<pre>
+def save_mode():
+    if DATASET == 'att':
+        model = newton.model.build_model(SGD_cache, Conv_cache, 2, (112, 92), SUBJECT_NUM, EPOCH, BATCH_SIZE)
+    elif DATASET == 'yale':
+        model = newton.model.build_model(SGD_cache, Conv_cache, 2, (192, 168), SUBJECT_NUM, EPOCH, BATCH_SIZE)
+    # training
+    model.fit(train['faces'], train['label'], batch_size = BATCH_SIZE,
+        nb_epoch = EPOCH, show_accuracy = True, verbose = 1)
+    model.save('./newton/modelCNN.h5')
+    model.save_weights('./newton/weightCNN.h5')
+    del model
+</pre>
+
+
+
+<p>这是为了能够在不同的场景中直接加载模型与模型参数，不需要再次训练，方便后期各种实验的展开。</p>
+
+<p>到这里主要要说明一下人脸重构的可视化的代码。正如之前所说，这个可视化代码是bytefish的教程中的，我稍加改动让它能够在3个模块中运行。它主要由subplot(), imsave(), normalize(), draw_img()这几个函数构成，使用matplotlib作为画图的库，在drawconv1()中画出了第一层卷积层的人脸。它们读入张量$\mathbb{R}^{n \times W \times H}$，然后选择前16或8张脸，将数据均匀地归一化到$[0, 255]$（这样方便根据数值大小着色），重构出人脸。在卷积网络这里，可以通过类似于下面那样的函数，加载保存好的模型，画出不同层的人脸：</p>
+
+
+<pre>
+def drawconv1(model, arg_X, SGD_cache, Conv_cache, pool_side, shape):
+    print 'drawing conv1 ...'
+    sgd_lr, sgd_decay, sgd_momentum = SGD_cache
+    conv_side, filter1, filter2 = Conv_cache
+    h, w = shape
+    model2 = Sequential()
+    model2.add(Convolution2D(filter1, conv_side, conv_side,
+        border_mode='same', weights = model.layers[0].get_weights(),
+        subsample = (2, 2), dim_ordering='tf', 
+        input_shape=(112, 92, 1)))
+    act = model2.predict(arg_X)
+    print act.shape
+    draw_img(act,"Conv Layer1","Conv 1 Face","./image/conv1.png")
+    del model2
+</pre>
+
+
+<h2>参考资料</h2>
+
+
+<p>Stanford, CS231n, Computer Vision<br></p>
+
+<p>github.com/bytefish/facerecognition guide<br></p>
+
+<p>Keras, <a href="https://keras.io/" target="_blank" rel="external">https://keras.io/</a><br></p>
+
+<p>AT\&amp;T数据集<br></p>
+
+
+<p>Yale数据集</p>
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/12/25/OperatingSys/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/12/14/abelfile/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="ZHAO YANG MIN's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        yangminzhao14@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">八月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>Yangminz Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

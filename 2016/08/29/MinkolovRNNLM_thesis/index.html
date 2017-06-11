@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            Mikolov RNNLM Thesis | 
+        
+        Yangminz Blog
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="ZHAO YANG MIN">
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content="null,MachineLearning,RNN,LanguageModel">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Yangminz Blog">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Mikolov RNNLM Thesis | Yangminz Blog">
+    <meta property="og:image" content="/img/favicon.png" />
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="MachineLearning"> <meta property="og:article:tag" content="RNN"> <meta property="og:article:tag" content="LanguageModel"> 
+
+    
+        <meta property="article:published_time" content="8月 29, 2016" />
+        <meta property="article:modified_time" content="6月 11, 2017" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Mikolov RNNLM Thesis | Yangminz Blog">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="http://yoursite.com" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Yangminz Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ZHAO YANG MIN",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Mikolov RNNLM Thesis",
+    "url": "http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html",
+    "datePublished": "8月 29, 2016",
+    "dateModified": "6月 11, 2017",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?fJTiM/K1J3dWIruo3pxtAw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?oCSEO3ST+aEypEwttTDI9g==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    .footer-sns-facebook {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHptNjU3LjYgODcuOGw0LjggMy44djU1LjJjMCA1NC42IDAgNTUuMi00LjYgNTkuNi00LjQgNC40LTYgNC42LTUwLjIgNS42bC00NS42IDEtNy4yIDUuNmMtMTAuNCA4LTE2LjggMTcuMi0xOS4yIDI3LjQtMSA1LTEuOCAyNC44LTEuOCA0NCAuMiAzOCAxLjYgNDQuNiAxMC44IDQ4IDIuOCAxLjIgMjguNCAyIDU2LjggMiA0Ny44IDAgNTIgLjIgNTYuMiAzLjhsNC44IDMuOHY1NS4yYzAgNTQuNiAwIDU1LjItNC42IDU5LjYtNC40IDQuNi01LjQgNC42LTU3IDUuMi0yOC44LjItNTQuNC44LTU2LjggMS40LTIuNC42LTUuNiAzLTYuOCA1LjQtMS44IDMuMi0yLjQgNDEuNC0yLjYgMTQzLjJsLS4yIDEzOC44LTUuNiA0LjgtNS42IDQuOEg2MDljLTUyLjQgMC01Mi44IDAtNTguMi00LjZsLTUuNC00LjYtLjItMTQwLjYtLjItMTQwLjYtNC44LTMuOGMtNC4yLTMuNC04LTMuOC0zNS42LTMuOC0zMi44IDAtNDEtMS44LTQzLjYtMTAtLjYtMi4yLTEuMi0yNS40LTEuMi01MS40IDAtNjAuOC0uMi01NyAzLjQtNjEuNiAyLjgtMy42IDYtNCAzNy44LTUgMzMtMSAzNS4yLTEuMiAzOS40LTUuNiA0LjYtNC40IDQuNi01LjIgNS44LTcxIDEuMi03My40LjItNjcuMiAxNi42LTk5LjQgOC0xNS44IDEyLjgtMjIgMjgtMzcgMTUuMi0xNS4yIDIxLjQtMTkuNiAzOC4yLTI4IDExLTUuNCAyNC0xMSAyOS0xMi4yIDYuMi0xLjggMjguNi0yLjYgNzEuMi0yLjYgNTguNi0uMiA2Mi42IDAgNjcgMy42eiIvPjwvc3ZnPg==);
+    }
+    
+    
+    .footer-sns-twitter {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHptNTMyLjggMjA1YzEwIDQgMjMgMTAuOCAyOC44IDE1LjIgMTIuNiA5LjIgMTYuNiAxMC42IDI5LjQgOS40IDYuNi0uNiAxMy0zLjIgMjAuNC04LjIgMTEuMi03LjYgMTkuNC05LjIgMjMuNi01IDMuNiAzLjYgMi44IDktMi44IDE4LjYtNy4yIDEyLjQtNiAxOC44IDQuMiAyNC4yIDQuNCAyLjIgOC4yIDUuNiA4LjYgNy40IDEgNC44LTEyLjYgMjQuMi0yMiAzMS44LTExLjggOS4yLTE3LjIgMjIuNi0xOS42IDQ3LjgtNC44IDUwLjQtNy44IDY2LjYtMTYuNCA4NS40LTMgNy03IDE3LjgtOC44IDI0LTEuOCA2LjQtNSAxNC42LTcuNCAxOC40LTIuMiAzLjgtNy40IDEzLTExLjQgMjAuNC0xNy4yIDMwLjgtNDMuNCA2MS40LTcxLjQgODMuOC0yNS42IDIwLjQtNDYgMzMuMi02NC4yIDQwLjItOC40IDMuMi0xOCA3LjYtMjEuNCA5LjYtNy40IDQuNi0yMi40IDguNi01Ny4yIDE1LTYyLjIgMTEuNi03OS4yIDExLjQtMTM1LjYtMS0zMi40LTctMzguNi05LTUyLTE2LjgtMjEuNC0xMi42LTI0LjItMTQuOC0yNC4yLTE5LjQgMC02LjIgMTAuMi05LjIgMzUtMTAuNCAyMi40LTEgMjguNi0yLjYgNTctMTQuMiAyMy44LTkuOCAyOS40LTEyLjggMzAuNC0xNi44IDIuMi04LjItMy0xMy4yLTI2LjgtMjUuNC0yNS44LTEzLjItMzIuMi0xOC40LTQzLjgtMzUuOC05LTEzLjYtMTAtMjEuMi0zLjYtMzMuNiA1LjQtMTAuOCAzLjYtMTUtMTEuOC0yNS40LTktNi0xNC0xMS42LTIwLjgtMjIuNi0yMy40LTM3LjgtMjUtNTAuOC03LjItNTkuOCA0LjgtMi40IDkuNC01LjQgMTAuMi02LjYgMi44LTQuMi0uNC0xNS42LTguNC0yOS0xMS42LTE5LjYtMTMuMi0yNS44LTEzLjItNTUuMiAwLTI4LjggMi42LTM3LjggMTItNDAuMiA5LTIuMiAxNC44IDEgMzUuNiAyMC4yIDI0LjggMjIuOCA0My42IDM2LjYgNjIuOCA0NS44IDggMy44IDE3LjggOS4yIDIyIDEyIDQuMiAyLjggMTQuOCA3IDIzLjQgOS4yIDguNiAyLjIgMjQuMiA2LjggMzQuOCAxMC4yIDEzLjQgNC40IDIzLjYgNi40IDMzIDYuNiAxMi44LjIgMTQuMi0uMiAxOC42LTUuNCA0LTQuOCA0LjgtNy44IDQuOC0xOS4yIDAtMTQuNCA1LjYtMzkuNiAxMS4yLTUwLjYgNC4yLTguNCAyOS4yLTM0LjIgMzkuOC00MS40IDcuOC01LjQgMzUuNi0xNiA1Mi0yMCAxNC4yLTMuNiAzMi42LTEuMiA1Mi40IDYuOHoiLz48L3N2Zz4=);
+    }
+    
+    
+    .footer-sns-gplus {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNiA3OGMtMjIuNCA1LjItNTUuOCA0MC4yLTYwLjYgNjMuNC0xLjQgNi40LTIgMTI5LjgtMS42IDM2Ny42LjYgMjk4LjYgMSAzNTguOCAzLjQgMzYzIDExIDIwLjIgMjEuNiAzMi40IDM3LjIgNDMgMTUgMTAuMiAxNy40IDExLjIgMzMgMTMgMTEuMiAxLjQgMTM2IDIgMzY1IDEuNiAzMTQtLjYgMzQ4LjYtMSAzNTUtMy44IDE1LjgtNy4yIDMzLjgtMjIgNDMuMi0zNS40IDUuMi03LjQgMTAuOC0xNi42IDEyLjYtMjAuNCAyLjgtNi40IDMuMi00MC44IDMuOC0zNTQgLjQtMjIzLS4yLTM1My40LTEuNC0zNjUtMi0xNy0yLjYtMTguNi0xMy0zNC04LjYtMTIuNi0xNC4yLTE4LjQtMjUuMi0yNS44LTcuOC01LjQtMTcuNC0xMS0yMS42LTEyLjQtNi0yLjItNzIuOC0yLjYtMzY1LjQtMi42LTE5Ni44LjItMzYxIC44LTM2NC40IDEuOHpNNDMwIDI5NS40YzQwLjYgMTUuNCA1Ni42IDIzLjggNzIuNiAzOC40IDYuOCA2LjIgNy4yIDE1LjIgMSAyMy40LTYuMiA4LTMzLjYgMzMuOC0zOSAzNi42LTUuNiAyLjgtMTcuNiAyLjgtMjMuMi0uMi0yLjQtMS4yLTguMi01LjItMTMtOC44LTExLjItOC42LTI0LjYtMTEuMi01NS4yLTExLjItMjcuNCAwLTQwLjYgMi42LTUyLjIgMTAuNC00LjQgMi44LTEyLjIgNy42LTE3LjIgMTAuNi0yMyAxMy4yLTUxLjQgNTUtNTUuOCA4Mi40LTIuNiAxNS42LTIuNCAzNC44LjIgNTEgMi44IDE3LjQgMTkuOCA0OC44IDM1LjIgNjUuMiAxNiAxNi42IDQ1IDMzLjYgNjIuOCAzNi42IDI2LjggNC40IDY1LjggMS42IDc5LjQtNS44IDIwLjYtMTEuNCAzMS0xOSA0MS0zMC40IDE4LjgtMjEuNiAyMy40LTM0LjIgMTUuNi00My44LTMuOC00LjgtNC40LTQuOC01MS01LjgtNjAuOC0xLjItNTYuMiAyLjItNTYuMi00My4yIDAtMzIuNC4yLTMzLjIgNC44LTM3IDQuNC0zLjYgOS0zLjggOTItMy44IDc5IDAgODcuOC40IDk0LjIgMy42IDExLjIgNS42IDEzIDExLjQgMTIuOCA0My40IDAgMjUuNC0uOCAzMC44LTcuNiA1OC00IDE2LjYtOS44IDM0LTEyLjYgMzktMi44IDUtOC4yIDE0LjItMTEuNiAyMC42LTguNCAxNS40LTI3LjIgMzYuOC00MC44IDQ2LjYtNS44IDQuNC0xMy44IDEwLjItMTcuNiAxMy4yLTMuOCAzLTExIDctMTYuMiA4LjgtNS4yIDEuOC0xNi4yIDYuNC0yNC40IDEwLTIyLjQgOS42LTM0LjggMTEuNi03MyAxMS42LTM3LjYuMi00Ny0xLjQtNzEtMTItOC4yLTMuNi0xNy42LTcuMi0yMC44LTgtMTUuOC0zLjgtNjctNDUuMi03Ny44LTYyLjgtMi4yLTMuOC03LjYtMTEuNi0xMS44LTE3LjItNC4yLTUuNC05LTE0LTEwLjYtMTktMS44LTQuOC02LjItMTYtMTAtMjQuOC0zLjYtOC44LTcuOC0yMi4yLTkuMi0yOS42LTMuMi0xOC44LTEuNC03OS40IDIuOC05MS40IDEzLjgtNDAuNiAzNS42LTc4IDU4LjgtMTAwLjIgMTQtMTMuNiA0Ny4yLTM2LjQgNTgtMzkuOCA0LjItMS40IDEzLjQtNS4yIDIwLjYtOC40IDIyLTEwIDMyLjgtMTEuNiA3Ni0xMSAzMy44LjYgNDAuNCAxLjIgNTAgNC44em0zNDAuOCA4MC44YzggMy42IDkuNiAxMS4yIDkuMiAzOS4yLS42IDM0LjQtLjYgMzQgNSAzOS42IDQuOCA1IDUuNCA1IDM3LjYgNSA0My40IDAgNDQuNC44IDQzLjIgMzYuMi0uOCAxNy0xLjIgMTguNC02LjQgMjMtNS40IDQuNi02LjYgNC44LTM3LjYgNC44LTMxLjIgMC0zMiAuMi0zNi44IDUtNS42IDUuNC01LjYgNC40LTUgNDEuMi40IDI2LjQuMiAyNy40LTQuNiAzMy00LjggNS42LTYgNS44LTI0LjQgNi40LTIwLjguOC0yOS42LTEuNC0zMy40LTguNC0xLjQtMi42LTItMTUuNi0xLjgtMzUuNi40LTMxLjIuNC0zMS42LTQuNi0zNi42cy01LjYtNS0zNi01Yy0xOC44IDAtMzMtLjgtMzYtMi4yLTcuNi0zLjYtOS42LTExLjItOC44LTMzLjguOC0yOC4yLjQtMjggNDEtMjggNDUuNCAwIDQ1LjQgMCA0NC42LTQyLjYtLjYtMzMtLjYtMzMgNS0zOC40IDQuNC00LjYgNi4yLTUgMjQuOC01IDExIDAgMjIuMiAxIDI1IDIuMnoiLz48L3N2Zz4=);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">统计语言模型的评价</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">Perplexity - 迷惑度/困惑度/混乱度</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.</span> <span class="post-toc-text">Word Error Rate - 词错误率</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">4.</span> <span class="post-toc-text">n元模型 - N-grams</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.</span> <span class="post-toc-text">长上下文 - long-context</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">6.</span> <span class="post-toc-text">无法发现独立单词的相似性 similarity of individual words</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">7.</span> <span class="post-toc-text">RNNLM - Recurrent Neural Network Language Model</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">8.</span> <span class="post-toc-text">误差反向传播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">9.</span> <span class="post-toc-text">实用的训练建议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">10.</span> <span class="post-toc-text">NNLMs的一些扩展 - Extensions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">11.</span> <span class="post-toc-text">舍去词汇 - Vocabulary Truncation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">12.</span> <span class="post-toc-text">分解输出层 - Factorization of the Output Layer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">13.</span> <span class="post-toc-text">最大熵模型 - Maximum Entropy</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Mikolov RNNLM Thesis
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>ZHAO YANG MIN</strong>
+        <span>8月 29, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/LanguageModel/">LanguageModel</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/MachineLearning/">MachineLearning</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/RNN/">RNN</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Mikolov RNNLM Thesis&url=http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Mikolov RNNLM Thesis&url=http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html&via=ZHAO YANG MIN" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2016/08/29/MinkolovRNNLM_thesis/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<p><strong> 这篇博客基于Mikolov大神的<a href="http://www.fit.vutbr.cz/~imikolov/rnnlm/thesis.pdf" target="_blank" rel="external">博士论文<em>Statistical Language Models based on Neural Networks</em></a>、相应的<a href="http://rnnlm.org/" target="_blank" rel="external">RNNLM(Recurrent Neural Network Language Model)公开源码</a>以及<a href="http://www.fit.vutbr.cz/~imikolov/rnnlm/google.pdf" target="_blank" rel="external">Mikolov在google做的slide</a>。</strong></p>
+<p>从Mikolov在google做的报告幻灯片来看，语言模型应该对任意词序列进行合理的评价，笼统地讲，也就是说有句法、文法意义的词序列的评价应该高于模糊的序列。</p>
+<h3>统计语言模型的评价</h3>
+
+<p>语言模型的质量基本通过困惑度(perplexity)和词错误率(word error rate)来进行评价：</p>
+<h3>Perplexity - 迷惑度/困惑度/混乱度</h3>
+
+<p>Perplexity(PPL)是对于词序列中的词而定义的：</p>
+<p>$$ PPL = \sqrt[K]{ \prod_{i= 1}^K \frac{1}{P(w<em>i | w</em>{1 \cdots i-1 } ) } } = 2^{ \color{red}{ -  \sum_{i=1}^K \frac{1}{K} log_2 P(w<em>i | w</em>{1 \cdots i-1 } ) }}  $$</p>
+<p>可以看到，打开根号以后，2的指数部分与交叉熵非常相似，因此PPL可以理解为测试集中的单词平均熵的指数放大。所以，PPL实际上是放大了交叉熵，低PPL与低熵一样，都是能清晰地传递信息的词序列。如果我们想一想语言的实质，实际上可以把语言看作一种词汇的序列，而不同的词汇之间千差万别，所以也大致上可以认为它们是离散的符号，这样想来，自然语言实际上就是离散的符号之间的一种特殊的、受语法规则限制的序列。从这个角度看，用PPL或者熵来衡量LM的质量是比较合理的。</p>
+<p>虽然我们采用PPL来衡量LM，但是很难像解函数最值问题一样，把一个LM扔进PPL得到数值，然后通过求PPL最小值来求解最优的LM，因为这基本上不是一个数值计算的问题，特别是考虑到极其复杂的现实语言应用情况时，就更绝无希望。根据Mikolov的博士论文提及的，Solomonoff关于这方面通用的预测优化方法<em><strong>Algorithmic Probability (ALP)</strong></em>做出了相当的贡献。另一个在这部分被Mikolov提及的工作是Mahoney的，他指出对于一个数据集求解最优模型实质上等同于一个通用的数据压缩问题(general data compression)。</p>
+<h3>Word Error Rate - 词错误率</h3>
+
+<p>词错误率WER的定义简单得多，就是一个纯粹的比例：</p>
+<p>$$ WER = \frac{S+D+I}{N} = \frac{Substitutions + Deletions + Insertions}{N} $$</p>
+<p>WER是为了将N词序列 $\mathbf{W}$ 的表达变换到另一种表达 $\mathbf{W}’$ 而所需进行的替换、删除、插入操作的最小操作数量。这种衡量方法有一个显而易见的缺点，就是对于非信息词汇(uninformative words)过分强调，所以充满了噪音，而显得并不精确。而相应的，优点是只要有了参考文本，就比较容易进行计算。</p>
+<h3>n元模型 - N-grams</h3>
+
+<p>简单的n元语言模型通过词汇的共同出现频率(word co-occurence frequencies)来进行估计概率。在n元模型中，如果给定了合理的上下文 $ h $ 和相应单词 $ w $ ，那么单词 $ w $ 出现在 $ h $ 中的概率应该比较高。相应的，一个意思相去甚远的单词$ \check{w} $应该有比较低的概率，这实质上是一种<strong>负采样</strong>的方法。</p>
+<p>$$ P(w|h) = \frac{C(h,w)}{C(h)} $$</p>
+<p>词汇的共同出现频率(word co-occurence frequencies)的策略是直接进行频数 $ C(h,w) $ 和 $ C(h) $ 的统计，通过计算上下文  $ h $ 条件下出现单词 $ w $ 的条件概率 $ P(w|h) $ 即可，显然合理的词序应该具有较大的概率。这里的上下文 $h$ 也可以理解为（记忆）历史history，如果 $h = \emptyset$ ，也就是说根本不需要考虑历史情况时，那么就蜕化为1元模型。 </p>
+<p>n元模型很简洁，通用性也比较高，所以它的计算速度很快，并且比较可靠。很多更好的技术对于应用并没有带来关键性的提升，但计算资源却消耗得多的多，所以n元模型仍有其魅力。Mikolov在论文中说的这句话比较有水平：</p>
+<blockquote>(those better techniques) provide just marginal improvements, not critical for success of given application.</blockquote>
+
+<p>问题同样是显著的。首先一个问题是上下文的匹配问题。很多情况下，嵌入在上下文 $h$ 的单词 $w$ 应该能嵌入很多与 $h$ 类似的上下文 $\tilde{h}$ 中，但是简单模型的计算方法只是粗糙地统计了 $h$ 的情况，所以只能精确地匹配到 $h$，而缺乏泛化到 $\tilde{h}$ 的能力，也就是说无法对相似的<strong>历史记录</strong> $ \tilde{h} $ 进行聚类。还有其他关于计算规模等性能上的问题，都是简单模型的缺陷。</p>
+<p>上一小段提到的泛化问题会导致稀疏性的问题。可以想象，在一篇文章中，训练集中<em>可见的</em>单词 $w$ 的上下文/历史 $h$ 很难重复出现，所以不考虑泛化的情况时，以及没有出现在训练集中的<em>不可见的</em>单词 $\hat{w}$ ，对于这两种情况，概率估计都会趋于/变成零。这就会显得非常稀疏，所以需要采用一些平滑(smoothing)技术，这样就可以“管中窥豹”了。 </p>
+<p>对于稀疏性的问题，一种改进模型是让词汇分类，再基于类进行训练，是为Class Based Models. 对于一些简单的情形，模型将每个单词映射到一个简单的类集合中，然后通过类训练n元模型。显然这种分类行为在某种意义上已经干预了词向量的表达，已经有一点人为地强行聚类的意思，不像word2vec根据文本而改变词向量自身的表述，而是另开洞天分类，显然对于稀疏性问题能有较大的提升。但是这种干预的成本是比较大的，比如实用专家知识进行人工分类时，会消耗较大的人力、时间、金钱成本。更惨的是，当训练集的规模增长的时候，Class Based Models的优势也渐趋于无。</p>
+<p>再提几个论文中提到的n元模型很难处理的语言特征：</p>
+<h3>长上下文 - long-context</h3>
+
+<p>比如句子 THE <strong><em>SKY</em></strong> ABOVE OUR HEADS IS <strong><em>BLUE</em></strong> 在这句话中，BLUE依赖于距离它不远的SKY。但是在其他的句子中，譬如 THE <strong><em>SKY</em></strong> THIS &lt; MONDAY, TUESDAY, …, SUNDAY &gt; &lt; MORNING, AFTERNOON, EVENING &gt; ABOVE OUR HEADS WAS <strong><em>BLUE</em></strong>，这些句子里的BLUE和SKY距离可能就有些太远了，N=4的情形已经不足以适用，而N=10的情况则会让计算量爆炸性地增长。  </p>
+<p>对于这个问题，论文中提到了一种改进模型：Cache Language Models. 它是基于这样的一种观测，比如在一片TOEFL的阅读文章中，讨论某一个专业话题时会出现许多在其他一般文章中看不到的专有词汇，这些专门词汇相对于其他通用词汇显得非常稀缺，但一旦在最近的历史中出现时，比如一篇TOEFL心理学文章中，那么在这篇文章中就有很大可能会再次出现。所以就像计算机系统的结构，引入缓存cache来改进n元模型，对PPL有很大的减少。</p>
+<p>另一种改进策略更偏向于统计模型以前的语言学模型:Structured Language Models. 距离较远的单词在语义和语法上紧密相连的句子实在是太多了，n元模型很难应对这些情况。在Structured Language Models中，句子被视作与让下文无关的语法树，叶子节点自然是独立的单词，而中间节点是非终符号(non-terminal symbols). 与传统语言学模型不同的是，Structured Language Models在构建语法树的时候采用了统计方法，在给定语法树框架下通过训练集来计算树的概率。除了计算与稳定性能的问题以外，这类模型对于歧义ambiguity很难处理，因为一个句子不同的歧义可能对应了不同结构的语法树。</p>
+<h3>无法发现独立单词的相似性 similarity of individual words</h3>
+
+<p>例如 PARTY WILL BE ON &lt; MONDAY, TUESDAY, …, SUNDAY &gt; 这句话中，即便我们训练了MONDAY和TUESDAY的情形，n模型也无法认定FRIDAY是高概率的句子。当然，这个要看词向量之间有没有关系，如果只是采用one-hot的词向量，那么肯定会产生词汇鸿沟。如果是word2vec训练过之后的模型，自然对FRIDAY的评价不会低，但是这样就有点本末倒置了。。。 </p>
+<p>为了克服n元模型的缺陷，Mikolov在论文<em><strong>Statistical Language Models based on Neural Networks</strong></em>中除了提到上面集中改进以外，主要论述了和标题一样的语言模型：基于神经网络的统计语言模型。这个语言模型主要解决的就是“n元模型的上下文/历史窗口变大时，计算量指数性地增长”这个问题。神经网络之所以比一般的n元模型更优秀，主要就是对于历史记忆的处理更加神奇。n元模型的历史是精确的n-1个单词的序列，但RNN将这部分记忆放在隐藏层中，并且把稀疏的RNN记忆隐藏层 $ h $ 射影到低维的连续空间，并且使 $ h $ 和 $ \tilde{h} $ 能够聚类，于是并不需要精确地匹配历史记忆 $ h $ ；另外由于RNN的矩阵和偏置向量是共享参数的，所以RNNLM只需要从训练集中训练较少的数据，从而模型具有较高的鲁棒性。</p>
+<h3>RNNLM - Recurrent Neural Network Language Model</h3>
+
+<p>RNNLM相对于Bengio提出的Feedforward NNLM的特点在于历史记忆的表达：在Feedforward NNLM中，历史仍然像n元模型一样是之前出现的若干单词，而在RNNLM中，历史的从数据集的训练中学习得到的。RNN的隐藏层不仅表现了前 $n-1$ 个单词的历史，而是之前所有的历史，因此理论上讲RNNLM可以克服长上下文单词之间的关联。</p>
+<p><img src="/images/MinkolovRNNLM/RNN.png" alt=""></p>
+<p>其中输入值 $w$ 的维数与词汇集中词汇的数量相同 $ dim(\mathbf{w}) = |\mathbf{V}| $ 大约在10K-200K量级，非常稀疏；隐层的规模要小很多，大约有50-1000个神经元左右； $\mathbf{U}$ 、 $\mathbf{V}$ 、 $\mathbf{W}$ 三个矩阵的形状按照线性变化而定。如果不使用 $\mathbf{W}$ 矩阵，也就是将RNN展开，那么神经网络的规模将会相当的大。</p>
+<p>RNN训练中的计算：</p>
+<p>$$ \mathbf{s}(t) = f(\mathbf{U} \cdot \mathbf{w}(t) + \mathbf{W} \cdot \mathbf{s}(t-1) ) $$</p>
+<p>$$ s_j(t) = f( \sum_i w<em>i(t) \cdot u</em>{ji} + \sum_l s<em>l(t-1) \cdot w</em>{jl} ) $$</p>
+<p>$$ \mathbf{y}(t) = g(\mathbf{V} \cdot \mathbf{s}(t) ) $$</p>
+<p>$$ y_k(t) = g( \sum_j s<em>j(t) \cdot v</em>{kj} ) $$</p>
+<p>其中对输出层采用softmax函数进行激活，以确保输出的概率满足归一化与大于零的条件：</p>
+<p>$$ f( x ) = sigmoid( x ) = \frac{1}{ 1 + e^{- x } } \ , \ g( x_k ) = softmax( x_k ) = \frac{ e^{ x<em>k } }{ \sum</em>{i} e^{ x_i } } $$</p>
+<p>模型训练采用随机梯度算法(<strong>SGD</strong>)。最初用比较小的随机数给 $\mathbf{U}$ 、 $\mathbf{V}$ 、 $\mathbf{W}$ 三个矩阵赋值，Mikolov提到在实验中使用平均数0、方差0.1的正态分布进行赋值。每训练一个单词，将 $\mathbf{U}$ 、 $\mathbf{V}$ 、 $\mathbf{W}$ 三个矩阵的参数更新一次。大致上训练的过程如下：</p>
+<pre>
+t = 0 # set time counter
+Initialize( s[t], 1 ) # initialize the state of the neurons in hidden layer s[t] to 1
+while Processed() == True: # if not all training examples were processed
+    t += 1
+    w[t] = Present( word[t] ) # present at the input layer w[t] the current word word[t]
+    Copy( s[t-1], w[t] ) # copy the state of the hidden layer s[t-1] to the input layer
+    s[t], y[t] = Forward() # perform forward pass to obtain s[t] and y[t]
+    e[t] = Gradient_Error( y[t] ) # compute gradient of error e[t] in the output layer
+    Back_Propagate()
+
+</pre>
+
+<h3>误差反向传播</h3>
+
+<p>误差估计方面采用交叉熵估计输出层中的误差向量 $\mathbf{e}_o (t) $ 的梯度:</p>
+<p>$$ Error = CE( \mathbf{y}(t) ) = \sum<em>l \log y</em>{l}(t) = \sum_l \log \left ( \frac{ e^{ \theta_l} }{ \sum e^{ \theta_i } } \right ) = \sum_l \left ( \theta_l - \log \sum e^{ \theta_i } \right ) $$</p>
+<p>其中$l$是正确预测的样本序数。由于采用one-hot表示，所以在做向量内积时，只需要将最终的正确分量累加即可。<br>因为计算输出层概率的时候采用了softmax激活函数，所以交叉熵中的对数部分会使softmax的上下指数分离出来。如果词向量 $\mathbf{w}(t)$ 预测得很好，那么它的结果 $\mathbf{w}(t+1)$ 与真正的目标向量  $\mathbf{d}(t)$ ，这两个one-hot编码的向量将会吻合。并且，因为one-hot编码与交叉熵分离softmax的分子分母，所以误差梯度有： </p>
+<p>$$ \mathbf{e}_o(t) = \frac{d CE(\mathbf{y})}{ d \mathbf{V} \cdot \mathbf{s}(t) } = \frac{d CE(softmax(\mathbf{\theta}))}{ d \mathbf{\theta} } = \mathbf{d}(t) - \mathbf{y}(t)  $$</p>
+<p>对于上式，如果固定变量 $s(t)$ ，则可以计算 $\mathbf{V}$ 矩阵的更新值： </p>
+<p>$$ \mathbf{e}_o(t) = \mathbf{d}(t) - \mathbf{y}(t) = \frac{d CE(\mathbf{y})}{ d \mathbf{V} \cdot \mathbf{s}(t) } \ , \ \frac{d CE(\mathbf{y})}{ d \mathbf{V} } = \mathbf{s}(t) \cdot \mathbf{e}_o(t)^T $$</p>
+<p>可见，$\mathbf{s}(t) \cdot \mathbf{e}_o(t)^T$ 实际上是数值 $CE(\mathbf{y}) \in \mathbb{R} $ 对矩阵变量 $\mathbf{V}$ 的Jacobian矩阵: </p>
+<p>$$ \mathbf{s}(t) \cdot \mathbf{e}<em>o(t)^T = \frac{d CE(\mathbf{y})}{ d \mathbf{V} } =<br>\begin{bmatrix}<br>\frac{\partial CE}{\partial v</em>{11}} &amp; \cdots &amp; \frac{\partial CE}{\partial v<em>{1N}} \<br>\vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial CE}{\partial v</em>{M1}} &amp; \cdots &amp; \frac{\partial CE}{\partial v_{MN}}<br>\end{bmatrix}<br> $$</p>
+<p>$$ \mathbf{V}(t+1) = \mathbf{V}(t) + \mathbf{s}(t) \cdot \mathbf{e}_o(t)^T \cdot \alpha $$</p>
+<p>$$ v<em>{jk}(t+1) = v</em>{jk}(t) + s<em>{j}(t) \cdot e</em>{ok}(t) \cdot \alpha $$</p>
+<p>$j$ 遍历了隐藏层，$k$ 遍历了输出层， $s<em>j(t)$ 是隐藏层中的第 $j$ 个神经元的输出，$e</em>{ok}(t)$ 是输出层第 $k$ 个神经元的误差梯度。学习率Learning Rate 是标量 $\alpha \in \mathbb{R}$，也可以看做一个微小增量，通过Jacobian矩阵变换到正确的梯度增量方向。  </p>
+<p>接着与上一个步骤刚好相反，这次固定矩阵 $\mathbf{V}$，计算交叉熵对隐藏层的Jacobian矩阵： </p>
+<p>$$ \frac{d CE(\mathbf{y})}{ d \mathbf{s}(t) } = \mathbf{e}_o(t)^T \cdot \mathbf{V} = \frac{d CE(\mathbf{y})}{ d simoid(\mathbf{\varphi}) } $$</p>
+<p>计算隐藏层的误差梯度 $\mathbf{e}_h(t)$ ：</p>
+<p>$$ \mathbf{e}_h(t) = d_h( \mathbf{e}_o(t)^T \cdot \mathbf{V}, t ) = d_h( \frac{d CE(\mathbf{y})}{ d sigmoid(\mathbf{\varphi}) }, t ) $$</p>
+<p>$$ d_{h,j}( \frac{d CE(\mathbf{y})}{ d sigmoid(\mathbf{\varphi}) }, t ) = \frac{d CE(\mathbf{y})}{ d sigmoid(\mathbf{\varphi}) } \times s_j(t) \cdot ( 1 - s_j(t) ) \ = \frac{d CE(\mathbf{y})}{ d sigmoid(\mathbf{\varphi}) } \cdot \left ( \frac{d sigmoid(\mathbf{\varphi})}{ d \mathbf{\varphi} } \right ) _j $$</p>
+<p>总之，隐藏层的梯度： </p>
+<p>$$ \mathbf{e}_h(t) = \frac{d CE(\mathbf{y})}{ d sigmoid(\mathbf{\varphi}) } \cdot \frac{d sigmoid(\mathbf{\varphi})}{ d \mathbf{\varphi} } = \frac{d CE(\mathbf{y})}{ d \mathbf{\varphi} } $$</p>
+<p>再更新 $\mathbf{U}$ 矩阵的值，推导与$\mathbf{V}$ 的情况一样，只是固定的变量多了一些，有 $\mathbf{w}(t) \ , \ \mathbf{W} \ , \ \mathbf{s}(t-1) $ ： </p>
+<p>$$ \mathbf{U}(t+1) = \mathbf{U}(t) + w(t) \cdot \mathbf{e}_h(t)^T \cdot \alpha $$</p>
+<p>$$ u<em>{ij}(t+1) = u</em>{ij}(t) + w<em>i(t) \cdot e</em>{hj}(t)^T \cdot \alpha $$</p>
+<p>矩阵 $\mathbf{W}$ 也一样：</p>
+<p>$$ \mathbf{W}(t+1) = \mathbf{W}(t) + \mathbf{s}(t-1) \cdot \mathbf{e}_h(t)^T \cdot \alpha $$</p>
+<p>$$ w<em>{lj}(t+1) = w</em>{lj}(t) + s<em>l (t-1) \cdot e</em>{hj}(t) \cdot \alpha $$</p>
+<h3>实用的训练建议</h3>
+
+<p>训练有多种选择。在处理训练的例子时，可以每次处理都把神经网络展开，但这样会带来很大的复杂度 $T \times |\mathbb{W}|$ ，其中 $T$ 是展开的次数，也就是回溯的次数，$|\mathbb{W}|$ 是每次训练的词汇数量。如果采用<strong><em>mini-batch</em></strong>的方式来处理，比如说每训练10-20个例子之后更新一次参数值，那么计算复杂度就可以消除 $T$ 的影响了。 </p>
+<p><img src="/images/MinkolovRNNLM/minibatch.png" alt=""></p>
+<p>使用双精度的实数以及一些正则化方法(regularization)会有助于提高数值的稳定性，以免因为舍入等等发生一些莫名其妙的计算问题。然而Mikolov说，在他们的实验中没有实用正则化，也没有实用L2惩罚。。。还有RNN的训练在极少数的某些情况下在BPTT训练中会指数爆炸，Mikolov在实验中采用的方法是限制误差梯度的最大值 $|\mathbf{e}| \in (-15, 15) $，这样的限制对于巨大的数据集而言是健康的。 </p>
+<h3>NNLMs的一些扩展 - Extensions</h3>
+
+<h3>舍去词汇 - Vocabulary Truncation</h3>
+
+<p>对于NNLMs相当现实的问题就是计算复杂度，大规模运算的代价会相当的高。计算次数基本上都以 $|\mathbb{H} \times \mathbb{V}|$ 为单位， $|\mathbb{H}|$ 是隐藏层的神经元数量，大规模的话大概有200个，词汇集的量就相当大了， $|\mathbb{V}| = 50K$ 也是不过分的。这样一来，计算时间就非常受词汇集大小的影响。所以为了提升性能，Bengio曾把所有不频繁出现的词汇扔到一个特殊的类中，并且根据他们的频率指派概率。 这样的处理是通过牺牲准确性来提升速度的。</p>
+<h3>分解输出层 - Factorization of the Output Layer</h3>
+
+<p>因为这部分内容在代码中也出现，具体在./rnnlmlib.cpp void CRnnLM::initNet() 函数中有涉及，所以给出比较详细的讨论。</p>
+<p>更sophisticated的方法是分解输出层。就像之前说的，如果对单词采用one-hot编码，那么向量空间的维度也将达到词汇量级别 $|\mathbb{V}|$ ，可以轻易突破100K。这样带来的计算复杂度很高，所以对单词进行分组是一种更好的措施。将单词分到一个具体的“类”中，以组为对象计算概率，而不是对全部词汇量，在组级别上计算概率分布，可以让计算变得更加简单。</p>
+<p><img src="/images/MinkolovRNNLM/factorization.png" alt=""></p>
+<p>Mikolov在论文中提到，这个点子可以追溯到Goodman在加速ME模型中使用的“类” - class. 看上面的图示：首先所有class的概率分布需要计算； 然后计算某个单词属于哪一个class的概率分布；在此基础上，并不需要计算全部 $ |\mathbb{V}| $ 的元素再对它们做softmax，只需要计算 $ |\mathbb{C}| + |\mathbb{V’}| $ ，也就是只要做类量级（根据设定，为常量）以及类中词汇量级的计算就够了。</p>
+<p>Mikolov在论文中提出了一个算法，基于1元模型中的词汇频率来给word指派class，也就是./rnnlmlib.cpp void CRnnLM::initNet() 函数中涉及的算法。这部分指派class的运算在训练以前完成，并且只基于相对频率关系，所以可以被认为是“频率装箱”(<em><strong>frequency binning</strong></em>)<sub>频率装箱/分级具体是如何实现的可以直接看代码部分的博客，注释中有提到</sub>. 这样的处理会使每一个特定的class中的单词量并不大，所以高频的 $ |\mathbb{V’}| $ 并不大，但是低频的单词依然会使 $ |\mathbb{V’}| $ 比较大。根据Mikolov的说法，通过分类优化大概可以把速度提高到100倍以上，但是模型的准确度会降低5-10%左右。</p>
+<p>具体而言，这部分算法是这样的：<br><br><br>因为采用了class，所以从隐藏层到输出层的计算变成了从隐藏层到class层 以及 隐藏层到输出层的分类子集：</p>
+<p>$$ c<em>m (t) = g \left ( \sum</em>{j} s<em>j (t) \cdot x</em>{mj} \right) = softmax \left ( \sum_{j} s<em>j (t) \cdot x</em>{mj} \right) = softmax( \mathbf{X} \cdot \mathbf{s}(t) ) $$</p>
+<p>$$ y<em>{ \mathbb{V’} } (t) = softmax \left( \sum</em>{j} s<em>j (t) \cdot v</em>{\mathbb{V’}j} \right) = softmax( \mathbf{V} \cdot \mathbf{s}(t) ) $$</p>
+<p>这样从class的角度看，单词 $ w(t+1) $ 的条件概率计算就是：</p>
+<p>$$ P(w_{t+1} | \mathbf{s}(t) ) = P( c_i | \mathbf{s}(t) ) \cdot P( w_i | c_i, \mathbf{s}(t) ) $$</p>
+<p>其中 $ w_i $ 是被预测的词，而$ c_i $是它的class.<br>也就是说先从隐藏层预测到class，再根据隐藏层、class一起决定。</p>
+<p><br></p>
+<p>前向传播就像上面的计算一样进行，但误差反向传播的时候，计算误差梯度时既需要计算word部分，也需要计算class的部分，反向传播到隐藏层的时候误差梯度需要加总。也就是说，训练隐藏层既能预测word也能预测class的概率分布。</p>
+<h3>最大熵模型 - Maximum Entropy</h3>
+
+<p>宏观来看，ME模型是一个直接将输入层线性变换到输出层的矩阵。这个模型的Motivation是因为训练数据集很大时，隐藏层也不得不随之增加，所以采用<em><strong>Joint Training With Maximum Entropy Model</strong></em>进行训练，可以将隐藏层的规模控制得很小。Mikolov在google展示了基于散列的<em><strong>Hash Based Maximum Entropy Model</strong></em>。 </p>
+<p><em><strong>Hash Based Maximum Entropy Model</strong></em>主要是直接将n元的隐藏层的所有可能情况当作一个散列表来看，这个隐藏层散列表关联一个输出结果：</p>
+<p><img src="/images/MinkolovRNNLM/MaximumEntropy1.png" alt=""><br>1元模型，而非0元<br><img src="/images/MinkolovRNNLM/MaximumEntropy2.png" alt=""><br>2元模型，而非1元<br><img src="/images/MinkolovRNNLM/MaximumEntropy3.png" alt=""><br>3元模型，而非2元</p>
+<p>以上三幅图都是google的slide中的图。需要注意的是，三幅图分别对应的是1元、2元、3元模型，而非0元、1元、2元模型，因为在这个模型中隐藏层被设定为 $n-1$ 的维度，而<em><strong>Hash Based Maximum Entropy Model</strong></em>将这 $n-1$ 元的隐藏层记忆直接通过散列函数关联到一个词向量，通过这种方式避免了过大的记忆复杂度与隐藏层矩阵运算，因此SGD训练将会简单许多。</p>
+<p>可以看到，对于一个使用了全部 $n$ 元的语言模型，每一隐藏元参数可以取遍词汇集中的任一单词，所以散列的参数情况一共有 $|\mathbb{V}|^n$ 种。而采用了hash的<em><strong>Hash Based Maximum Entropy Model</strong></em>则可以认为是一个精简的$n$ 元语言模型(<em>pruned n-gram model</em>).  </p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/09/03/MinkolovRNNLM_code/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/07/17/HLM02/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="ZHAO YANG MIN's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        yangminzhao14@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">八月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>Yangminz Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
