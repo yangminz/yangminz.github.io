@@ -1,0 +1,36 @@
+<body>
+    <h1>Lambda Expression Evaluator</h1>
+
+    <p>Write your lambda expression here. Note that we have 3 grammars:</p>
+    <ol>
+        <li>Var</li>
+        <li>Var=>Body</li>
+        <li>(E)(F)</li>
+    </ol>
+    <p>Try these Church number programes:</p>
+    <ul style="font-family: monospace;">
+        <li>0: f=>x=>x</li>
+        <li>1: f=>x=>(f)(x)</li>
+        <li>2: f=>x=>(f)((f)(x))</li>
+        <li>3: f=>x=>(f)((f)((f)(x)))</li>
+        <li>let Add = a=>b=>f=>x=>((a)(f))(((b)(f))(x)) <p>Then ((Add)(1))(2) can be expended as: ((a=>b=>f=>x=>((a)(f))(((b)(f))(x)))(f=>x=>(f)(x)))(f=>x=>(f)((f)(x)))</p></li>
+        <li>let Mul = n=>m=>f=>x=>((n)((m)(f)))(x) <p>Then ((Mul)(2))(3) can be expended as: ((n=>m=>f=>x=>((n)((m)(f)))(x))(f=>x=>(f)((f)(x))))(f=>x=>(f)((f)((f)(x))))</p></li>
+        <li>let Pred = n=>f=>x=>(((n)(g=>h=>(h)((g)(f))))(u=>x))(u=>u) <p>Then 3-1 can be expended as: (n=>f=>x=>(((n)(g=>h=>(h)((g)(f))))(u=>x))(u=>u))(f=>x=>(f)((f)((f)(x))))</p></li>
+        <li>let IsZero = m=>((m)(x=>T=>F=>F))(T=>F=>T) <p>Then (((IsZero)(3))(Branch1))(Branch2) can be expended as: (((m=>((m)(x=>T=>F=>F))(T=>F=>T))(f=>x=>(f)((f)((f)(x)))))(Branch1))(Branch2)</p></li>
+        <li>Y combinator: f=>(x=>(f)((x)(x)))(x=>(f)((x)(x)))</li>
+        <li>Z combinator: f=>(x=>(f)(u=>((x)(x))(u)))(x=>(f)(u=>((x)(x))(u)))</li>
+        <li>let Fac(N) = 1 if N===0 else N * Fac(N-1)": ((Y)(Fac=>N=>(((IsZero)(N))(1))(((Mul)(N))((Pred)(N)))))(3) <p>Then factorial 3 (Fac(3))can be expended as: ((f=>(x=>(f)((x)(x)))(x=>(f)((x)(x))))(Fac=>N=>(((m=>((m)(x=>T=>F=>F))(T=>F=>T))(N))(f=>x=>(f)(x)))(((n=>m=>f=>x=>((n)((m)(f)))(x))(N))((n=>f=>x=>(((n)(g=>h=>(h)((g)(f))))(u=>x))(u=>u))(N)))))(f=>x=>(f)((f)((f)(x))))</p></li>
+    </ul>
+
+    <textarea id="input-text" rows="5" cols="100" style="font-family: monospace;">f=>x=>(f)(x)</textarea><br>
+
+    <button onclick="evaluateExpr()">Evaluate!</button>
+
+    <p id="output-text" style="font-family: monospace;">f=>x=>(f)(x)</p>
+
+    <div id="canvas"></div>
+</body>
+
+<scripts>
+    <script src="../dst/lambda.js"></script>
+</scripts>
